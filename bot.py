@@ -87,3 +87,7 @@ if __name__ == "__main__":
         port=int(os.environ.get("PORT", 10000))
     )
 
+client = OpenAI(base_url="https://aipipe.org/openai/v1", api_key=AIPIPE_TOKEN)
+print("TELEGRAM_BOT_TOKEN loaded:", bool(TELEGRAM_BOT_TOKEN))
+print("AIPIPE_TOKEN loaded:", bool(AIPIPE_TOKEN))
+print("LOG_URL loaded:", bool(LOG_URL))
