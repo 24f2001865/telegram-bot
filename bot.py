@@ -4,7 +4,8 @@ import os
 from openai import OpenAI
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
-
+from dotenv import load_dotenv
+load_dotenv()
 # ------
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 AIPIPE_TOKEN = os.getenv("AIPIPE_TOKEN")
