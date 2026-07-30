@@ -6,9 +6,9 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
 
 # ------
-TELEGRAM_BOT_TOKEN = os.getenv("8779714398:AAHw_kupOmrOFg84MQxQWeLDsK53pF6nl9Y")
-AIPIPE_TOKEN = os.getenv("eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZjIwMDE4NjVAZHMuc3R1ZHkuaWl0bS5hYy5pbiIsImlhdCI6MTc4NTQxODE0MywiaXNzIjoiaHR0cHM6Ly9haXBpcGUub3JnIiwiYXVkIjoiYWlwaXBlLWFwaSIsImV4cCI6MTc4NjAyMjk0M30.MqtCDLegna0EC-L2ZKkqhF_SZT6QqtwGy6dE-lizw1A")
-LOG_URL = os.getenv("https://raw.githubusercontent.com/24f2001865/telegram-bot.git/main/run.jsonl")  # see Step 5 — where run.jsonl will be hosted
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+AIPIPE_TOKEN = os.getenv("AIPIPE_TOKEN")
+LOG_URL = os.getenv("LOG_URL")  # see Step 5 — where run.jsonl will be hosted
 # -------------------------------------------
 
 
