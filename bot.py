@@ -6,10 +6,11 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
 
 # ------
-TELEGRAM_BOT_TOKEN = "8779714398:AAHw_kupOmrOFg84MQxQWeLDsK53pF6nl9Y"
-AIPIPE_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZjIwMDE4NjVAZHMuc3R1ZHkuaWl0bS5hYy5pbiIsImlhdCI6MTc4NTQxODE0MywiaXNzIjoiaHR0cHM6Ly9haXBpcGUub3JnIiwiYXVkIjoiYWlwaXBlLWFwaSIsImV4cCI6MTc4NjAyMjk0M30.MqtCDLegna0EC-L2ZKkqhF_SZT6QqtwGy6dE-lizw1A"
-LOG_URL = "https://raw.githubusercontent.com/24f2001865/telegram-bot.git/main/run.jsonl"  # see Step 5 — where run.jsonl will be hosted
+TELEGRAM_BOT_TOKEN = os.getenv("8779714398:AAHw_kupOmrOFg84MQxQWeLDsK53pF6nl9Y")
+AIPIPE_TOKEN = os.getenv("eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZjIwMDE4NjVAZHMuc3R1ZHkuaWl0bS5hYy5pbiIsImlhdCI6MTc4NTQxODE0MywiaXNzIjoiaHR0cHM6Ly9haXBpcGUub3JnIiwiYXVkIjoiYWlwaXBlLWFwaSIsImV4cCI6MTc4NjAyMjk0M30.MqtCDLegna0EC-L2ZKkqhF_SZT6QqtwGy6dE-lizw1A")
+LOG_URL = os.getenv("https://raw.githubusercontent.com/24f2001865/telegram-bot.git/main/run.jsonl")  # see Step 5 — where run.jsonl will be hosted
 # -------------------------------------------
+
 
 client = OpenAI(base_url="https://aipipe.org/openai/v1", api_key=AIPIPE_TOKEN)
 LOG_FILE = "run.jsonl"
@@ -63,8 +64,25 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     log_event({"type": "outgoing", "chat_id": chat_id, "text": final_reply})
     await update.message.reply_text(final_reply)
 
-app = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
-app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-print("Bot is running... (Ctrl+C to stop)")
-app.run_polling()
+from flask import Flask
+from threading import Thread
+
+web = Flask(__name__)
+
+@web.route("/")
+def home():
+    return "Bot is running"
+
+def start_bot():
+    app = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    print("Bot is running...")
+    app.run_polling()
+
+if __name__ == "__main__":
+    Thread(target=start_bot, daemon=True).start()
+    web.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 10000))
+    )
 
