@@ -1,0 +1,4 @@
+{"type": "incoming", "chat_id": 1901832302, "text": "What is 15% of 200", "timestamp": 1785421259.0366833}
+{"type": "outgoing", "chat_id": 1901832302, "text": "{\"answer\": 30, \"log_url\": \"https://raw.githubusercontent.com/24f2001865/telegram-bot.git/main/run.jsonl\"}", "timestamp": 1785421267.587585}
+{"type": "incoming", "chat_id": 1901832302, "text": "what is 20% of 200", "timestamp": 1785427060.7263174}
+{"type": "outgoing", "chat_id": 1901832302, "text": "{\"answer\": 40, \"log_url\": \"https://raw.githubusercontent.com/24f2001865/telegram-bot.git/main/run.jsonl\"}", "timestamp": 1785427068.0288}
